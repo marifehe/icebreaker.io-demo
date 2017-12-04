@@ -1,7 +1,7 @@
 {
   "name": "icebreaker.io-demo",
   "version": "0.0.0",
-  "description": "Demo project to show how to use webrtc-icebreaker library",
+  "description": "Demo project to show how to use icebreaker.io libraries",
   "main": "index.js",
   "scripts": {
     "start": "webpack && node ./bin/www",
