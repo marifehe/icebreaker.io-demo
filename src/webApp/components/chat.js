@@ -28,7 +28,8 @@ class Chat extends Component {
   }
 
   initIcebreakerClient() {
-    this.icebreakerClient = icebreaker('https://localhost:8443', {
+    const host = document.location.host;
+    this.icebreakerClient = icebreaker(`https://${host}`, {
       path: '/socket'
     });
 
