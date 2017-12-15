@@ -17,15 +17,15 @@ icebreaker.io enables peer-to-peer real-time communications, using WebRTC techno
 
 2. [Clone this repository](https://help.github.com/articles/cloning-a-repository/) and navigate to the created folder.
 3. Install the dependencies with `npm install`.
-4. Start the application with `npm start`.
+4. Start the application with `npm run dev`.
 
 After following these steps you are all set. You should see the following messages in your console:
 ```bash
->>>>> Server listening on port: 8443
->>>>> Access website through https://localhost:8443
+>>>>> Server listening on port: 8081
+>>>>> Access website through https://localhost:8081
 ```
 
-If you open the url `https://localhost:8443` in your browser, you should view the application:
+If you open the url `https://localhost:8081` in your browser, you should view the application:
 
 
 ![alt text](./dev/icebreaker.io-demo.png?raw=true "Demo screenshot")

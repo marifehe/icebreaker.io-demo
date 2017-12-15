@@ -4,7 +4,8 @@
   "description": "Demo project to show how to use icebreaker.io libraries",
   "main": "index.js",
   "scripts": {
-    "start": "node ./node_modules/webpack/bin/webpack.js && node ./bin/www",
+    "dev": "node ./node_modules/webpack/bin/webpack.js && NODE_ENV=development node ./bin/www",
+    "start": "node ./node_modules/webpack/bin/webpack.js && NODE_ENV=production node ./bin/www",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

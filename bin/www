@@ -6,14 +6,23 @@ const path = require('path');
 const app = require('../app');
 const icebreaker = require('icebreaker.io');
 
+const port = 8081;
+
 // Credentials needed for SSL
-const key = fs.readFileSync(path.join(__dirname, '../certs/server.key'), 'utf8');
-const cert = fs.readFileSync(path.join(__dirname, '../certs/server.crt'), 'utf8');
+// self signed certificate for development
+let sslKeyPath = '../certs/server.key';
+let sslCertPath = '../certs/server.crt';
+console.log('Environment: ', process.env.NODE_ENV);
+if (process.env.NODE_ENV === 'production') {
+  sslKeyPath = '../certs/privkey.pem';
+  sslCertPath = '../certs/fullchain.pem';
+}
+
+const key = fs.readFileSync(path.join(__dirname, sslKeyPath), 'utf8');
+const cert = fs.readFileSync(path.join(__dirname, sslCertPath), 'utf8');
 const credentials = { key, cert };
-
-const port = 8443;
-
 const server = https.createServer(credentials, app);
+
 server.listen(port);
 console.log('>>>>> Server listening on port:', port);
 console.log(`>>>>> Access website through https://localhost:${port}`);
