@@ -28,9 +28,10 @@ class Chat extends Component {
   }
 
   initIcebreakerClient() {
-    const host = document.location.host;
-    this.icebreakerClient = icebreaker(`https://${host}`, {
-      path: '/socket'
+    const origin = document.location.origin;
+    const pathName = document.location.pathname;
+    this.icebreakerClient = icebreaker(origin, {
+      path: `${pathName}socket`
     });
 
     this.icebreakerClient.events.connectionEnded.addOnce(this.onConnectionEnded);
