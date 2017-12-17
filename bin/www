@@ -1,27 +1,26 @@
 'use strict'
 
 const https = require('https');
+const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const app = require('../app');
 const icebreaker = require('icebreaker.io');
 
+let server;
 const port = 8081;
 
-// Credentials needed for SSL
-// self signed certificate for development
-let sslKeyPath = '../certs/server.key';
-let sslCertPath = '../certs/server.crt';
-console.log('Environment: ', process.env.NODE_ENV);
-if (process.env.NODE_ENV === 'production') {
-  sslKeyPath = '../certs/privkey.pem';
-  sslCertPath = '../certs/fullchain.pem';
+switch (process.env.NODE_ENV) {
+  case 'production':
+    server = http.createServer(app);
+    break;
+  default:
+    const key = fs.readFileSync(path.join(__dirname, '../certs/server.key'), 'utf8');
+    const cert = fs.readFileSync(path.join(__dirname, '../certs/server.crt'), 'utf8');
+    const credentials = { key, cert };
+    server = https.createServer(credentials, app);
+    break;
 }
-
-const key = fs.readFileSync(path.join(__dirname, sslKeyPath), 'utf8');
-const cert = fs.readFileSync(path.join(__dirname, sslCertPath), 'utf8');
-const credentials = { key, cert };
-const server = https.createServer(credentials, app);
 
 server.listen(port);
 console.log('>>>>> Server listening on port:', port);
